@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -34,19 +33,20 @@ int** createMatrix(int m, int n) {
 
 
 
-
 int main() {
     
     int numOfMs = 0;
     int maxMs = 20;
     int ***matArr = (int ***)malloc(maxMs * sizeof(int **));
+    int matRows[20];
+    int matCols[20];
     int run = 1;
     
     
     
     while(run == 1){
         int userSelect = 1;
-        printf("Current Num of Matrices: %d \nOptions: \n 1) Create Matrix (if num of Matrices is 19, Create Matrix will not work)\n 2) Print A Matrix (%d) \n n) Any Other Int to Exit\nSelect an option: ", numOfMs,numOfMs);
+        printf("Current Num of Matrices: %d \nOptions: \n 1) Create Matrix (if num of Matrices is 19, Create Matrix will not work)\n 2) Print A Matrix (%d) \n 3) Transpose a Matrix\n n) Any Other Int to Exit\nSelect an option: ", numOfMs,numOfMs);
         scanf("%d", &userSelect);
         if (userSelect == 1 && numOfMs < 20){
             int tempM = 0;
@@ -62,6 +62,10 @@ int main() {
             }
             int** newMatrix = createMatrix(tempM, tempN);
             matArr[numOfMs] = newMatrix;
+            // mxn matrix
+            matRows[numOfMs] = tempM;
+            matCols[numOfMs] = tempN;
+
             numOfMs++;
             printMatrix(tempM, tempN, newMatrix);
             
@@ -73,7 +77,9 @@ int main() {
                 printf("Choose a num from 1-%d : ", numOfMs);
                 scanf("%d", &tempNum);
                 if (tempNum >= 1 && tempNum <= numOfMs){
-                    printf("Getting: %d", tempNum);
+                    printf("Matrix %d : \n", tempNum);
+                    printMatrix(matRows[tempNum-1], matCols[tempNum-1], matArr[tempNum-1]);
+                    printf("\n");
                     
                 }else{
                     printf("not valid\n");

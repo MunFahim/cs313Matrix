@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
+
+
 void printMatrix(int m, int n, int** mat){
     for (int i = 0; i < m; i++){
         printf("[ ");
@@ -28,8 +32,43 @@ int** createMatrix(int m, int n) {
     return array; 
 } 
 
+void deleteMatrix(int rows, int** matrix){
+    for (int i = 0; i < rows; i++){
+        free(matrix[i]);
+    }
+    free(matrix);
+}
+
+int** transpose(int rows, int cols, int** currMatrix){
+    
+    int** newM = malloc(cols * sizeof(int*)); 
+    for (int i = 0; i < cols; i++) { 
+        newM[i] = malloc(rows * sizeof(int)); 
+    }
+
+    for (int i = 0; i < rows; i++){
+        for (int j = 0; j < cols; j++){
+            newM[j][i] = currMatrix[i][j];
+        }
+    }
+
+    deleteMatrix(rows, currMatrix);
+    return newM;
+
+}
 
 
+int getNum(int max){
+    int tempNum;
+    printf("Choose a num from 1-%d : ", max);
+    scanf("%d", &tempNum);
+    if (tempNum >= 1 && tempNum <= max){
+        return tempNum-1;
+    }else{
+        printf("not valid\n");
+        getNum(max);
+    }
+}
 
 
 
@@ -73,17 +112,28 @@ int main() {
             if (numOfMs == 0){
                 printf("No Matrices found\n");
             }else{
-                int tempNum;
-                printf("Choose a num from 1-%d : ", numOfMs);
-                scanf("%d", &tempNum);
-                if (tempNum >= 1 && tempNum <= numOfMs){
-                    printf("Matrix %d : \n", tempNum);
-                    printMatrix(matRows[tempNum-1], matCols[tempNum-1], matArr[tempNum-1]);
-                    printf("\n");
-                    
-                }else{
-                    printf("not valid\n");
-                }
+                int tNum = getNum(numOfMs);
+                printf("Matrix %d : \n", tNum);
+                printMatrix(matRows[tNum], matCols[tNum], matArr[tNum]);
+                printf("\n");
+                
+            }
+        }else if (userSelect == 3){
+            if (numOfMs == 0){
+                printf("No Matrices found\n");
+            }else{
+                int tNum = getNum(numOfMs);
+                printf("Transposing Matrix %d : \n", tNum);
+                printMatrix(matRows[tNum], matCols[tNum], matArr[tNum]);
+
+                matArr[tNum] = transpose(matRows[tNum], matCols[tNum], matArr[tNum]);
+                int changeR = matRows[tNum];
+                matRows[tNum] = matCols[tNum];
+                matCols[tNum] = changeR;
+
+                printf("New Matrix %d : \n", tNum);
+                printMatrix(matRows[tNum], matCols[tNum], matArr[tNum]);
+                printf("\n");
                 
             }
         }else{

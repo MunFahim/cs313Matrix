@@ -228,8 +228,8 @@ int main() {
 
             }
         }else if (userSelect == 6){
-            if (numOfMs == 0 || numOfMs >= 19){
-                printf("No Matrices found, or too many Matrices (restart program)\n");
+            if (numOfMs < 2 || numOfMs >= 19){
+                printf("No Matrices found (or less than 2) , or too many Matrices (restart program)\n");
             }else{
                 
                 int firstMatrix = getNum(numOfMs);
@@ -255,8 +255,8 @@ int main() {
                 }
             }
         }else if (userSelect == 7){
-            if (numOfMs == 0 || numOfMs >= 19){
-                printf("No Matrices found, or too many Matrices (restart program)\n");
+            if (numOfMs < 2 || numOfMs >= 19){
+                printf("No Matrices found (or less than 2) , or too many Matrices (restart program)\n");
             }else{
                 int firstMatrix = getNum(numOfMs);
                 int secMatrix = getNum(numOfMs);
@@ -280,8 +280,8 @@ int main() {
                 }
             }
         }else if (userSelect == 8){
-            if (numOfMs == 0 || numOfMs >= 19){
-                printf("No Matrices found, or too many Matrices (restart program)\n");
+            if (numOfMs < 2 || numOfMs >= 19){
+                printf("No Matrices found (or less than 2), or too many Matrices (restart program)\n");
             }else{
                 
                 int firstMatrix = getNum(numOfMs);
